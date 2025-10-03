@@ -37,6 +37,7 @@ planner/
 ├── example.py             # Academic examples (Blocks World, Logistics, etc.)
 ├── business_examples.py   # Real-world business scenarios
 ├── requirements.txt       # Python dependencies
+├── LICENSE                # GNU General Public License v3.0
 ├── CITATION.bib          # BibTeX citation for the research paper
 └── README.md             # This file
 ```
@@ -397,7 +398,21 @@ To extend this planner:
 
 ## License
 
-MIT License - feel free to use and modify for your planning needs!
+This project is licensed under the **GNU General Public License v3.0** (GPL-3.0).
+
+See the [LICENSE](LICENSE) file for details.
+
+This means you can:
+- ✅ Use this software commercially
+- ✅ Modify the source code
+- ✅ Distribute this software
+- ✅ Use this software privately
+
+But you must:
+- 📋 Disclose the source code when distributing
+- 📋 Include the original license and copyright
+- 📋 State any changes made to the code
+- 📋 Release any modifications under GPL-3.0
 
 ## Acknowledgments
 
