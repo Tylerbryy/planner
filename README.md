@@ -2,9 +2,12 @@
 
 A sophisticated planning system that leverages Large Language Models (LLMs) through DSPy to solve large-scale planning problems via problem decomposition and intelligent search space pruning.
 
+**Based on**: *"Inspire or Predict? Exploring New Paradigms in Assisting Classical Planners with Large Language Models"*
+Yu et al., arXiv:2508.11524 [cs.AI], August 2025
+
 ## Overview
 
-This implementation is based on the research paper approach that addresses large-scale planning challenges by:
+This implementation is based on the research paper that addresses large-scale planning challenges by:
 
 1. **Problem Decomposition**: Breaking complex planning problems into simpler sub-tasks
 2. **LLM-Guided Search**: Using LLMs to prune the search space and provide heuristic guidance
@@ -19,7 +22,7 @@ This implementation is based on the research paper approach that addresses large
 - ✅ **Plan Validation**: Validates generated plans against domain constraints
 - ✅ **Search Space Pruning**: Intelligently reduces search space using LLM guidance
 - ✅ **Optimization Support**: Built-in DSPy optimizers (BootstrapFewShot, MIPROv2, Random Search)
-- ✅ **Multiple Domains**: Examples for Blocks World, Logistics, and Robot Navigation
+- ✅ **Multiple Domains**: Academic examples (Blocks World, Logistics, Robot Navigation) + Real-world business examples (Supply Chain, Manufacturing, Marketing, etc.)
 
 ## Architecture
 
@@ -27,12 +30,15 @@ This implementation is based on the research paper approach that addresses large
 
 ```
 planner/
-├── signatures.py      # DSPy signatures defining LLM interfaces
-├── modules.py         # DSPy modules implementing planning components
-├── planner.py         # Main planner orchestrator
-├── optimizer.py       # Optimization and training utilities
-├── example.py         # Example usage and demonstrations
-└── README.md         # This file
+├── signatures.py          # DSPy signatures defining LLM interfaces
+├── modules.py             # DSPy modules implementing planning components
+├── planner.py             # Main planner orchestrator
+├── optimizer.py           # Optimization and training utilities
+├── example.py             # Academic examples (Blocks World, Logistics, etc.)
+├── business_examples.py   # Real-world business scenarios
+├── requirements.txt       # Python dependencies
+├── CITATION.bib          # BibTeX citation for the research paper
+└── README.md             # This file
 ```
 
 ### Key Modules
@@ -199,38 +205,72 @@ print(f"Validity Rate: {results['validity_rate']:.1%}")
 
 ## Example Domains
 
-### Blocks World
+### Academic Examples (example.py)
 
-Classic AI planning domain with stacking blocks:
-
+**Blocks World** - Classic AI planning domain:
 ```python
 from example import blocks_world_example, run_planner_example
-
 problem = blocks_world_example()
 result = run_planner_example(problem, GuidanceMode.PREDICT, "Blocks World")
 ```
 
-### Logistics
-
-Package delivery with trucks:
-
+**Logistics** - Package delivery optimization:
 ```python
 from example import logistics_example, run_planner_example
-
 problem = logistics_example()
 result = run_planner_example(problem, GuidanceMode.HYBRID, "Logistics")
 ```
 
-### Robot Navigation
-
-Grid-based robot navigation with obstacles:
-
+**Robot Navigation** - Grid-based pathfinding:
 ```python
 from example import robot_navigation_example, run_planner_example
-
 problem = robot_navigation_example()
 result = run_planner_example(problem, GuidanceMode.INSPIRE, "Robot Navigation")
 ```
+
+### Real-World Business Examples (business_examples.py)
+
+**Supply Chain Optimization** - Multi-warehouse inventory distribution:
+```python
+from business_examples import supply_chain_optimization, run_business_example
+result = run_business_example(supply_chain_optimization, GuidanceMode.PREDICT)
+```
+*Use case:* Optimize inventory levels across warehouses, minimize shipping costs, meet stock thresholds
+
+**Software Project Planning** - Feature development with dependencies:
+```python
+from business_examples import software_project_planning, run_business_example
+result = run_business_example(software_project_planning, GuidanceMode.HYBRID)
+```
+*Use case:* Schedule development tasks, manage team capacity, handle technical dependencies
+
+**Manufacturing Workflow** - Production line scheduling:
+```python
+from business_examples import manufacturing_workflow, run_business_example
+result = run_business_example(manufacturing_workflow, GuidanceMode.PREDICT)
+```
+*Use case:* Schedule production orders, optimize machine utilization, meet deadlines
+
+**Customer Service Routing** - Support ticket management:
+```python
+from business_examples import customer_service_routing, run_business_example
+result = run_business_example(customer_service_routing, GuidanceMode.INSPIRE)
+```
+*Use case:* Route tickets to appropriate teams, meet SLAs, manage escalations
+
+**Marketing Campaign Launch** - Multi-channel coordination:
+```python
+from business_examples import marketing_campaign_launch, run_business_example
+result = run_business_example(marketing_campaign_launch, GuidanceMode.HYBRID)
+```
+*Use case:* Plan product launches, allocate budget across channels, coordinate content
+
+**Event Planning** - Corporate conference logistics:
+```python
+from business_examples import event_planning, run_business_example
+result = run_business_example(event_planning, GuidanceMode.PREDICT)
+```
+*Use case:* Manage venue booking, speaker coordination, catering, budget constraints
 
 ## Advanced Features
 
@@ -308,14 +348,43 @@ optimized = optimizer.optimize(trainset, metric=custom_metric)
 
 ## Research Background
 
-This implementation is based on the approach described in:
+This implementation is based on the research paper:
 
-> "Addressing large-scale planning problems has become one of the central challenges in the planning community, deriving from the state-space explosion caused by growing objects and actions."
+**"Inspire or Predict? Exploring New Paradigms in Assisting Classical Planners with Large Language Models"**
+*Wenkai Yu, Jianhang Tang, Yang Zhang, Shanjiang Tang, Kebing Jin, Hankz Hankui Zhuo*
+arXiv:2508.11524v1 [cs.AI], August 2025
+DOI: [10.48550/arXiv.2508.11524](https://doi.org/10.48550/arXiv.2508.11524)
 
-Key insights:
-- **Problem Decomposition**: Breaking problems into sub-tasks partitions the search space
-- **LLM Integration**: LLMs provide valuable guidance when integrated with domain knowledge
-- **Domain Knowledge Matters**: LLM4Predict (domain-specific) outperforms LLM4Inspire (general) on well-defined domains
+### Abstract Summary
+
+> "Addressing large-scale planning problems has become one of the central challenges in the planning community, deriving from the state-space explosion caused by growing objects and actions. Recently, researchers have explored the effectiveness of leveraging Large Language Models (LLMs) to generate helpful actions and states to prune the search space. However, prior works have largely overlooked integrating LLMs with domain-specific knowledge to ensure valid plans."
+
+The paper proposes a novel LLM-assisted planner with problem decomposition and introduces two paradigms:
+- **LLM4Inspire**: Provides heuristic guidance using general knowledge
+- **LLM4Predict**: Employs domain-specific knowledge to infer intermediate conditions
+
+### Key Research Insights
+
+1. **Problem Decomposition**: Breaking large planning problems into simpler sub-tasks effectively partitions the search space and reduces computational complexity
+
+2. **LLM Integration**: LLMs can effectively locate feasible solutions when pruning the search space, making them valuable tools for assisting classical planners
+
+3. **Domain Knowledge Matters**: Experimental results show that **LLM4Predict (domain-specific knowledge) holds particular promise compared with LLM4Inspire (general knowledge)** when solving well-defined planning domains
+
+4. **Search Space Partition**: The decomposition approach demonstrates strong ability in search space partition across multiple planning domains
+
+### Citation
+
+If you use this implementation in your research, please cite the original paper:
+
+```bibtex
+@article{yu2025inspire,
+  title={Inspire or Predict? Exploring New Paradigms in Assisting Classical Planners with Large Language Models},
+  author={Yu, Wenkai and Tang, Jianhang and Zhang, Yang and Tang, Shanjiang and Jin, Kebing and Zhuo, Hankz Hankui},
+  journal={arXiv preprint arXiv:2508.11524},
+  year={2025}
+}
+```
 
 ## Contributing
 
@@ -330,9 +399,9 @@ To extend this planner:
 
 MIT License - feel free to use and modify for your planning needs!
 
-## Citation
+## Acknowledgments
 
-If you use this planner in your research, please cite the original paper on LLM-assisted planning with problem decomposition.
+This implementation faithfully reproduces the approach described in the research paper by Yu et al. We thank the authors for their groundbreaking work on integrating LLMs with classical planning through problem decomposition and the innovative LLM4Inspire/LLM4Predict paradigms.
 
 ## Troubleshooting
 
